@@ -1,0 +1,874 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Article Fiesta - Boost Your Website's SEO with AI Technology</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 20px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            border-radius: 0 0 20px 20px;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #4c51bf;
+        }
+
+        .logo::before {
+            content: "🎯";
+            font-size: 1.5rem;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #64748b;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: #4c51bf;
+        }
+
+        .nav-buttons {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .btn {
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 10px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 0.9rem;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: #64748b;
+            border: 2px solid #e2e8f0;
+        }
+
+        .btn-secondary:hover {
+            border-color: #4c51bf;
+            color: #4c51bf;
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 5rem 0;
+            text-align: center;
+            color: white;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            line-height: 1.2;
+        }
+
+        .hero .highlight {
+            background: linear-gradient(135deg, #84fab0 0%, #8fd3f4 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            position: relative;
+        }
+
+        .hero .highlight::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(135deg, #84fab0 0%, #8fd3f4 100%);
+            border-radius: 2px;
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            margin-bottom: 2rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            opacity: 0.9;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin-bottom: 4rem;
+        }
+
+        /* Dashboard Preview */
+        .dashboard-preview {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 30px 60px rgba(0,0,0,0.2);
+            padding: 2rem;
+            max-width: 800px;
+            margin: 0 auto;
+            transform: perspective(1000px) rotateX(5deg);
+            transition: transform 0.3s ease;
+        }
+
+        .dashboard-preview:hover {
+            transform: perspective(1000px) rotateX(0deg);
+        }
+
+        .dashboard-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .dashboard-nav {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .dashboard-nav span {
+            color: #64748b;
+            font-weight: 500;
+        }
+
+        .dashboard-nav span.active {
+            color: #4c51bf;
+            border-bottom: 2px solid #4c51bf;
+            padding-bottom: 0.5rem;
+        }
+
+        .article-list {
+            background: #f8fafc;
+            border-radius: 12px;
+            padding: 1.5rem;
+        }
+
+        .article-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .article-item:last-child {
+            border-bottom: none;
+        }
+
+        .article-title {
+            font-weight: 600;
+            color: #1e293b;
+        }
+
+        .article-meta {
+            display: flex;
+            gap: 2rem;
+            color: #64748b;
+            font-size: 0.9rem;
+        }
+
+        .article-actions {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .action-btn {
+            background: #4c51bf;
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            font-size: 0.8rem;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .action-btn:hover {
+            background: #3730a3;
+            transform: translateY(-1px);
+        }
+
+        /* Trust Logos */
+        .trust-logos {
+            padding: 4rem 0;
+            text-align: center;
+            background: rgba(255, 255, 255, 0.1);
+            margin: 4rem 0;
+            border-radius: 20px;
+        }
+
+        .logos-grid {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 3rem;
+            flex-wrap: wrap;
+            margin-bottom: 2rem;
+        }
+
+        .logo-item {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: rgba(255, 255, 255, 0.7);
+            transition: color 0.3s;
+        }
+
+        .logo-item:hover {
+            color: white;
+        }
+
+        .testimonial {
+            max-width: 600px;
+            margin: 0 auto;
+            color: white;
+            font-style: italic;
+            font-size: 1.1rem;
+            line-height: 1.8;
+        }
+
+        .testimonial-author {
+            margin-top: 1rem;
+            font-weight: 600;
+            font-style: normal;
+        }
+
+        /* How It Works Section */
+        .how-it-works {
+            background: white;
+            padding: 6rem 0;
+            margin: 4rem 0;
+            border-radius: 40px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 3rem;
+            color: #1e293b;
+        }
+
+        .section-title .highlight {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .steps-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 3rem;
+            margin-top: 4rem;
+        }
+
+        .step-card {
+            text-align: center;
+            padding: 2rem;
+            border-radius: 20px;
+            background: #f8fafc;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .step-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+
+        .step-number {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.5rem;
+            margin: 0 auto 1.5rem;
+        }
+
+        .step-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: #1e293b;
+        }
+
+        .step-card p {
+            color: #64748b;
+            line-height: 1.6;
+        }
+
+        .step-preview {
+            background: white;
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-top: 1.5rem;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+
+        /* Features Section */
+        .features {
+            padding: 6rem 0;
+            text-align: center;
+            color: white;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .feature-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 2rem;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: transform 0.3s, background 0.3s;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        .feature-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .feature-card h3 {
+            font-size: 1.25rem;
+            margin-bottom: 1rem;
+            color: white;
+        }
+
+        .feature-card p {
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        /* CTA Section */
+        .cta-section {
+            background: white;
+            padding: 6rem 0;
+            margin: 4rem 0;
+            border-radius: 40px;
+            text-align: center;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+
+        .cta-content {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .cta-section h2 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: #1e293b;
+        }
+
+        .cta-section p {
+            font-size: 1.1rem;
+            color: #64748b;
+            margin-bottom: 2rem;
+        }
+
+        .cta-preview {
+            background: #f8fafc;
+            border-radius: 20px;
+            padding: 2rem;
+            margin-top: 3rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .ai-item {
+            background: white;
+            border-radius: 12px;
+            padding: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+
+        .ai-item:hover {
+            transform: translateX(10px);
+        }
+
+        .ai-icon {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.2rem;
+        }
+
+        /* Footer */
+        footer {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 40px 40px 0 0;
+            padding: 3rem 0 1rem;
+            margin-top: 4rem;
+            color: white;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h4 {
+            margin-bottom: 1rem;
+            color: #84fab0;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-section ul li a {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-section ul li a:hover {
+            color: white;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+            padding-top: 1rem;
+            text-align: center;
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .dashboard-preview {
+                transform: none;
+                margin: 0 1rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .steps-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .logos-grid {
+                gap: 1.5rem;
+            }
+
+            .article-item {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 1rem;
+            }
+
+            .article-meta {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .step-card,
+        .feature-card,
+        .ai-item {
+            animation: fadeInUp 0.6s ease-out;
+        }
+
+        /* Glassmorphism effect */
+        .glass {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="container">
+            <div class="logo">Article Fiesta</div>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#features">Features</a></li>
+                <li><a href="#pricing">Pricing</a></li>
+                <li><a href="#blog">Blog</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <div class="nav-buttons">
+                <a href="#" class="btn btn-secondary">Sign In</a>
+                <a href="#" class="btn btn-primary">Free SEO Tools</a>
+            </div>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <div class="container">
+            <h1>Boost Your Website's<br>SEO with <span class="highlight">AI Technology</span></h1>
+            <p>Our tool uses AI technology to provide personalized recommendations for optimizing your website's content, structure, and meta tags.</p>
+            <div class="hero-buttons">
+                <a href="#" class="btn btn-primary">Get Started for Free</a>
+                <a href="#" class="btn btn-secondary">View Documentation</a>
+            </div>
+            
+            <div class="dashboard-preview">
+                <div class="dashboard-header">
+                    <div class="logo">Article Fiesta</div>
+                    <div class="dashboard-nav">
+                        <span class="active">Article List</span>
+                        <span>Keywords</span>
+                        <span>Create Article</span>
+                    </div>
+                </div>
+                
+                <div class="article-list">
+                    <h3>Article List</h3>
+                    <div class="article-item">
+                        <div>
+                            <div class="article-title">Unlock the Power of Your Website's Core</div>
+                            <div class="article-meta">
+                                <span>5 mins ago</span>
+                                <span>1,145 words</span>
+                            </div>
+                        </div>
+                        <div class="article-actions">
+                            <button class="action-btn">Artificial Intelligence</button>
+                        </div>
+                    </div>
+                    <div class="article-item">
+                        <div>
+                            <div class="article-title">Unlock the Power of Your Website's Core</div>
+                            <div class="article-meta">
+                                <span>12 mins ago</span>
+                                <span>854 words</span>
+                            </div>
+                        </div>
+                        <div class="article-actions">
+                            <button class="action-btn">Internal Linking</button>
+                        </div>
+                    </div>
+                    <div class="article-item">
+                        <div>
+                            <div class="article-title">Unlock the Power of Your Website's Core</div>
+                            <div class="article-meta">
+                                <span>1 hour ago</span>
+                                <span>1,243 words</span>
+                            </div>
+                        </div>
+                        <div class="article-actions">
+                            <button class="action-btn">Content Structure</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="trust-logos">
+        <div class="container">
+            <div class="logos-grid">
+                <div class="logo-item">Coca-Cola</div>
+                <div class="logo-item">SKYO</div>
+                <div class="logo-item">Pallet</div>
+                <div class="logo-item">OpenAI</div>
+                <div class="logo-item">CAUSAL</div>
+            </div>
+            <div class="testimonial">
+                "I've been using this Article Fiesta for a few months now and I have to say, I'm impressed. The personalized recommendations for optimizing my website's content and structure have made a huge difference in my search rankings."
+                <div class="testimonial-author">
+                    - Leslie Alexander<br>
+                    Co-Founder & CEO, Behance
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="how-it-works">
+        <div class="container">
+            <h2 class="section-title">How to Boost <span class="highlight">Your SEO</span><br>with Article Fiesta</h2>
+            
+            <div class="steps-grid">
+                <div class="step-card">
+                    <div class="step-number">1</div>
+                    <h3>Decide on the article you want written for you</h3>
+                    <p>Start by creating a new project with Article Fiesta. Title your article by filling in the topics you want to cover. Our AI will then analyze your specifications and create a comprehensive outline for your article.</p>
+                    <div class="step-preview">
+                        <h4>Create a new article</h4>
+                        <form>
+                            <div style="margin-bottom: 1rem;">
+                                <label style="display: block; margin-bottom: 0.5rem; font-weight: 600;">Keyword:</label>
+                                <input type="text" placeholder="How Artificial Intelligence is Revolutionizing..." style="width: 100%; padding: 0.75rem; border: 1px solid #e2e8f0; border-radius: 8px;">
+                            </div>
+                            <div style="margin-bottom: 1rem;">
+                                <label style="display: block; margin-bottom: 0.5rem; font-weight: 600;">Meta Description:</label>
+                                <textarea placeholder="Describe your article..." style="width: 100%; padding: 0.75rem; border: 1px solid #e2e8f0; border-radius: 8px; min-height: 100px;"></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Create Article</button>
+                        </form>
+                    </div>
+                </div>
+
+                <div class="step-card">
+                    <div class="step-number">2</div>
+                    <h3>AI generates the content</h3>
+                    <p>Our AI system takes your specifications and creates high-quality, SEO-optimized content. The AI analyzes your topic and creates engaging content based on the keyword research and competitor analysis.</p>
+                    <div class="step-preview">
+                        <h4>SEO Article</h4>
+                        <div style="background: #f8fafc; padding: 1rem; border-radius: 8px; margin-bottom: 1rem;">
+                            <div style="display: flex; gap: 1rem; margin-bottom: 1rem;">
+                                <button class="btn btn-primary" style="padding: 0.5rem 1rem; font-size: 0.8rem;">AI Generation</button>
+                                <span style="color: #64748b;">Keywords</span>
+                            </div>
+                            <div style="color: #64748b; font-size: 0.9rem;">
+                                Generating high-quality content...
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="step-card">
+                    <div class="step-number">3</div>
+                    <h3>Publish the content</h3>
+                    <p>Once your article is ready, you can review, edit, and publish it directly to your website. Our platform handles all the technical SEO aspects to ensure maximum visibility.</p>
+                    <div class="step-preview">
+                        <h4>The Future Is Now: Changing the World</h4>
+                        <div style="background: #f8fafc; padding: 1rem; border-radius: 8px;">
+                            <div style="display: flex; gap: 1rem; margin-bottom: 1rem;">
+                                <span style="background: #10b981; color: white; padding: 0.25rem 0.5rem; border-radius: 4px; font-size: 0.8rem;">Published</span>
+                                <span style="background: #3b82f6; color: white; padding: 0.25rem 0.5rem; border-radius: 4px; font-size: 0.8rem;">Optimized</span>
+                                <span style="background: #f59e0b; color: white; padding: 0.25rem 0.5rem; border-radius: 4px; font-size: 0.8rem;">Indexed</span>
+                            </div>
+                            <button class="btn btn-primary" style="padding: 0.5rem 1rem; font-size: 0.8rem;">Publish</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="features">
+        <div class="container">
+            <h2 class="section-title">Effortlessly manage your SEO articles with our<br>AI-powered. <span class="highlight">Create article in seconds and<br>discuss any issues in context</span> with your team</h2>
+            
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">🔍</div>
+                    <h3>Keyword Research</h3>
+                    <p>Discover high-impact keywords to boost your search rankings and drive organic traffic.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📊</div>
+                    <h3>Competitive Benchmarks</h3>
+                    <p>Track your competitors' performance and identify opportunities for improvement.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🎯</div>
+                    <h3>Content Suggestions</h3>
+                    <p>Get AI-powered suggestions for optimizing your content structure and readability.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">⚡</div>
+                    <h3>Real-time SEO Guidance</h3>
+                    <p>Receive instant feedback on your content's SEO performance as you write.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🤖</div>
+                    <h3>Advanced AI Tools</h3>
+                    <p>Leverage cutting-edge AI technology to automate your SEO workflow.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📈</div>
+                    <h3>More traffic for You</h3>
+                    <p>Proven strategies to increase your website's visibility and organic reach.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="cta-section">
+        <div class="container">
+            <div class="cta-content">
+                <h2>Explore Our<br>AI-Generated</h2>
+                <p>Discover the effectiveness of our AI-Generated Articles designed to boost your website's performance.</p>
+                <a href="#" class="btn btn-primary">Check Out Our Articles</a>
+            </div>
+            
+            <div class="cta-preview">
+                <div class="ai-item">
+                    <div class="ai-icon">📝</div>
+                    <div>
+                        <h4>Article Business</h4>
+                        <p>Our mission is to make AI-generated content accessible to everyone.</p>
+                    </div>
+                </div>
+                <div class="ai-item">
+                    <div class="ai-icon">🎯</div>
+                    <div>
+                        <h4>Article Marketing</h4>
+                        <p>Explore SEO optimized articles.</p>
+                    </div>
+                </div>
+                <div class="ai-item">
+                    <div class="ai-icon">🚀</div>
+                    <div>
+                        <h4>Article Healthcare</h4>
+                        <p>Explore AI-generated articles.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>Product</h4>
+                    <ul>
+                        <li><a href="#">Features</a></li>
+                        <li><a href="#">Pricing</a></li>
+                        <li><a href="#">API</a></li>
+                        <li><a href="#">Documentation</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Company</h4>
+                    <ul>
+                        <li><a href="#">About</a></li>
+                        <li><a href="#">Blog</a></li>
+                        <li><a href="#">Careers</a></li>
+                        <li><a href="#">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Resources</h4>
+                    <ul>
+                        <li><a href="#">Help Center</a></li>
+                        <li><a href="#">Community</a></li>
+                        <li><a href="#">Templates</a></li>
+                        <li><a href="#">Case Studies</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Legal</h4>
+                    <ul>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Terms of Service</a></li>
+                        <li><a href="#">Cookie Policy</a></li>
+                        <li><a href="#">GDPR</a></li

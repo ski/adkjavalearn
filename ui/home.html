@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jolly AI Chat</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <div class="top-extension-bar">
+        <span>J</span> Get Jolly AI Chat for Chrome <button class="install-btn">Install Extension</button>
+    </div>
+
+    <div class="app-container">
+        <aside class="sidebar-left">
+            <div class="sidebar-header">
+                <div class="logo">
+                    <span class="logo-icon">J</span> Jolly
+                </div>
+                <button class="icon-btn-square">+</button>
+            </div>
+
+            <div class="user-profile">
+                <img src="https://i.pravatar.cc/40?u=matthew" alt="User Avatar" class="avatar">
+                <div class="user-details">
+                    <span class="user-name">Matthew Johnson</span>
+                    <span class="account-type">Free account</span>
+                </div>
+                <span>›</span>
+            </div>
+
+            <nav class="main-menu">
+                <p class="menu-title">MENU</p>
+                <ul>
+                    <li><a href="#" class="menu-link"><span>🏠</span> Home</a></li>
+                    <li><a href="#" class="menu-link"><span>📅</span> My Meetings</a></li>
+                    <li><a href="#" class="menu-link active"><span>💬</span> Jolly AI Chat <span class="new-badge">NEW</span></a></li>
+                    <li><a href="#" class="menu-link"><span>🤝</span> Shared with Me</a></li>
+                    <li><a href="#" class="menu-link"><span>📝</span> Notes</a></li>
+                    <li><a href="#" class="menu-link"><span>🧩</span> Integrations</a></li>
+                </ul>
+            </nav>
+
+            <div class="credits-box">
+                <div class="credits-info">
+                    <p>80 credits left today</p>
+                    <a href="#">Upgrade →</a>
+                </div>
+                <div class="progress-bar-container">
+                    <div class="progress-bar"></div>
+                </div>
+            </div>
+
+            <div class="sidebar-footer">
+                 <ul>
+                    <li><a href="#" class="menu-link"><span>⚙️</span> Settings</a></li>
+                    <li><a href="#" class="menu-link"><span>❓</span> Help & Support</a></li>
+                </ul>
+            </div>
+        </aside>
+
+        <main class="main-content">
+            <header class="main-header">
+                <button class="header-btn">Share</button>
+                <button class="header-btn">Delete</button>
+            </header>
+
+            <div class="promo-banner">
+                <span class="promo-badge">LIMITED</span>
+                <p>Get 1 month FREE by paying annually <a href="#">View Discount →</a></p>
+                <button class="close-btn">×</button>
+            </div>
+
+            <div class="chat-start-view">
+                <h1>Start talking to Jolly</h1>
+                <p>Your friendly AI chat assistant! Need quick answers, smart suggestions, or just a cheerful conversation? Jolly is here to help with a smile. Start chatting now! ✨</p>
+                
+                <div class="chat-input-area">
+                    <textarea placeholder="Write a question..."></textarea>
+                    <div class="chat-input-actions">
+                        <div class="left-actions">
+                            <button class="action-btn">GPT-4o mini ▾</button>
+                            <button class="action-btn">+ Add content</button>
+                        </div>
+                        <button class="send-btn">↑</button>
+                    </div>
+                </div>
+
+                <div class="suggestion-cards">
+                    <div class="card">How do I prepare for a web designer interview?</div>
+                    <div class="card">What are the key principles of effective web design?</div>
+                    <div class="card">What are the best design trends for websites in 2025?</div>
+                </div>
+
+                <div class="recent-chat-preview">
+                    <h3>Recent Chat</h3>
+                    <div class="recent-chat-cards">
+                        <div class="card">
+                            <p>New chat</p>
+                            <span>20 secs ago</span>
+                        </div>
+                        <div class="card">
+                            <p>Give me unique name logo for CRM dashboard</p>
+                            <span>45 mins ago</span>
+                        </div>
+                        <div class="card">
+                            <p>Create SaaS web app categories</p>
+                            <span>3 hour ago</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <aside class="sidebar-right">
+            <div class="search-bar">
+                <input type="text" placeholder="Search">
+                <span class="search-shortcut">⌘ K</span>
+            </div>
+
+            <div class="chat-history">
+                <h3 class="history-group-title">TODAY</h3>
+                <ul class="history-list">
+                    <li><a href="#"><span>💬</span> New Chat <span class="time">11:50 PM</span></a></li>
+                    <li><a href="#"><span>💬</span> Give me unique name logo for... <span class="time">11:05 PM</span></a></li>
+                    <li><a href="#"><span>💬</span> Create SaaS web app categori... <span class="time">08:57 PM</span></a></li>
+                </ul>
+                <h3 class="history-group-title">YESTERDAY</h3>
+                 <ul class="history-list">
+                    <li><a href="#"><span>💬</span> Custom platform solution <span class="time">09:12 AM</span></a></li>
+                    <li><a href="#"><span>💬</span> Investment insights monetizati... <span class="time">07:02 AM</span></a></li>
+                    <li><a href="#"><span>💬</span> Give me 10 similar ecommerce... <span class="time">04:50 AM</span></a></li>
+                    <li><a href="#"><span>💬</span> 5 top ecommerce integration a... <span class="time">04:11 AM</span></a></li>
+                    <li><a href="#"><span>💬</span> Create content for privacy poli... <span class="time">02:16 AM</span></a></li>
+                </ul>
+            </div>
+        </aside>
+    </div>
+
+</body>
+</html>
