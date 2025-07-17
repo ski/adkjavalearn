@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modern Landing Page - Web Components</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            scroll-behavior: smooth;
+        }
+        
+        /* Add some spacing for the fixed header */
+        landing-page {
+            margin-top: 70px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation Header -->
+    <navigation-header></navigation-header>
+    
+    <!-- Main Landing Page Content -->
+    <landing-page id="home"></landing-page>
+    
+    <!-- Testimonials Section -->
+    <testimonial-section id="about"></testimonial-section>
+    
+    <!-- Footer Section -->
+    <footer-section id="contact"></footer-section>
+    
+    <!-- Load Web Components -->
+    <script>
+        // Web Components JavaScript will be loaded here
+        // You can either include it inline or load from a separate file
+        
+        class LandingPage extends HTMLElement {
+          constructor() {
+            super();
+            this.attachShadow({ mode: 'open' });
+            this.shadowRoot.innerHTML = `
+              <style>
+                :host {
+                  display: block;
+                  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+                  line-height: 1.6;
+                  color: #333;
+                  min-height: 100vh;
+                }
+                
+                .hero {
+                  text-align: center;
+                  padding: 100px 20px;
+                  color: white;
+                  background: 
+                    linear-gradient(135deg, rgba(102, 126, 234, 0.8) 0%, rgba(118, 75, 162, 0.8) 100%),
+                    url('https://images.unsplash.com/photo-1497366216548-37526070297c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');
+                  background-size: cover;
+                  background-position: center;
+                  background-attachment: fixed;
+                  position: relative;
+                  min-height: 100vh;
+                  display: flex;
+                  flex-direction: column;
+                  justify-content: center;
+                  align-items: center;
+                }
+                
+                .hero h1 {
+                  font-size: 3.5rem;
+                  font-weight: 700;
+                  margin-bottom: 20px;
+                  text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+                  animation: fadeInUp 1s ease-out;
+                }
+                
+                .hero p {
+                  font-size: 1.3rem;
+                  margin-bottom: 40px;
+                  max-width: 600px;
+                  margin-left: auto;
+                  margin-right: auto;
+                  opacity: 0.9;
+                  animation: fadeInUp 1s ease-out 0.2s both;
+                }
+                
+                .cta-button {
+                  display: inline-block;
+                  background: linear-gradient(45deg, #ff6b6b, #ee5a24);
+                  color: white;
+                  padding: 18px 40px;
+                  text-decoration: none;
+                  border-radius: 50px;
+                  font-size: 1.2rem;
+                  font-weight: 600;
+                  transition: all 0.3s ease;
+                  box-shadow: 0 8px 25px rgba(255, 107, 107, 0.3);
+                  animation: fadeInUp 1s ease-out 0.4s both;
+                }
+                
+                .cta-button:hover {
+                  transform: translateY(-3px);
+                  box-shadow: 0 12px 35px rgba(255, 107, 107, 0.4);
+                }
+                
+                .features {
+                  background: white;
+                  padding: 80px 20px;
+                }
+                
+                .container {
+                  max-width: 1200px;
+                  margin: 0 auto;
+                }
+                
+                .features h2 {
+                  text-align: center;
+                  font-size: 2.5rem;
+                  margin-bottom: 60px;
+                  color: #333;
+                }
+                
+                .features-grid {
+                  display: grid;
+                  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+                  gap: 40px;
+                }
+                
+                .feature-card {
+                  text-align: center;
+                  padding: 40px 20px;
+                  border-radius: 15px;
+                  background: #f8f9fa;
+                  transition: transform 0.3s ease, box-shadow 0.3s ease;
+                }
+                
+                .feature-card:hover {
+                  transform: translateY(-5px);
+                  box-shadow: 0 15px 40px rgba(0,0,0,0.1);
+                }
+                
+                .feature-icon {
+                  width: 80px;
+                  height: 80px;
+                  background: linear-gradient(45deg, #667eea, #764ba2);
+                  border-radius: 50%;
+                  display: flex;
+                  align-items: center;
+                  justify-content: center;
+                  margin: 0 auto 20px;
+                  font-size: 2rem;
+                }
+                
+                .feature-card h3 {
+                  font-size: 1.5rem;
+                  margin-bottom: 15px;
+                  color: #333;
+                }
+                
+                .feature-card p {
+                  color: #666;
+                  line-height: 1.6;
+                }
+                
+                @keyframes fadeInUp {
+                  from {
+                    opacity: 0;
+                    transform: translateY(30px);
+                  }
+                  to {
+                    opacity: 1;
+                    transform: translateY(0);
+                  }
+                }
+                
+                @media (max-width: 768px) {
+                  .hero {
+                    background-attachment: scroll;
+                    min-height: 80vh;
+                  }
+                  .hero h1 {
+                    font-size: 2.5rem;
+                  }
+                  .hero p {
+                    font-size: 1.1rem;
+                  }
+                  .features-grid {
+                    grid-template-columns: 1fr;
+                  }
+                }
+              </style>
+              
+              <div class="hero">
+                <h1>Transform Your Business</h1>
+                <p>Discover the power of modern web technologies with our innovative solutions. We help businesses grow faster and reach their full potential.</p>
+                <a href="#features" class="cta-button">Get Started Today</a>
+              </div>
+              
+              <div class="features" id="features">
+                <div class="container">
+                  <h2>Why Choose Us?</h2>
+                  <div class="features-grid">
+                    <div class="feature-card">
+                      <div class="feature-icon">⚡</div>
+                      <h3>Lightning Fast</h3>
+                      <p>Our optimized solutions deliver exceptional performance and speed to keep your business ahead of the competition.</p>
+                    </div>
+                    <div class="feature-card">
+                      <div class="feature-icon">🛡️</div>
+                      <h3>Secure & Reliable</h3>
+                      <p>Built with security in mind, our platform ensures your data is protected with enterprise-grade encryption.</p>
+                    </div>
+                    <div class="feature-card">
+                      <div class="feature-icon">📈</div>
+                      <h3>Scalable Growth</h3>
+                      <p>Scale effortlessly as your business grows. Our flexible architecture adapts to your changing needs.</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            `;
+          }
+          
+          connectedCallback() {
+            // Add smooth scrolling for CTA button
+            const ctaButton = this.shadowRoot.querySelector('.cta-button');
+            ctaButton.addEventListener('click', (e) => {
+              e.preventDefault();
+              const features = this.shadowRoot.querySelector('#features');
+              features.scrollIntoView({ behavior: 'smooth' });
+            });
+          }
+        }
+
+        class NavigationHeader extends HTMLElement {
+          constructor() {
+            super();
+            this.attachShadow({ mode: 'open' });
+            this.shadowRoot.innerHTML = `
+              <style>
+                :host {
+                  position: fixed;
+                  top: 0;
+                  left: 0;
+                  right: 0;
+                  z-index: 1000;
+                  background: rgba(255, 255, 255, 0.95);
+                  backdrop-filter: blur(10px);
+                  transition: all 0.3s ease;
+                }
+                
+                .nav {
+                  display: flex;
+                  justify-content: space-between;
+                  align-items: center;
+                  padding: 15px 40px;
+                  max-width: 1200px;
+                  margin: 0 auto;
+                }
+                
+                .logo {
+                  font-size: 1.5rem;
+                  font-weight: 700;
+                  color: #333;
+                  text-decoration: none;
+                }
+                
+                .nav-links {
+                  display: flex;
+                  list-style: none;
+                  margin: 0;
+                  padding: 0;
+                  gap: 30px;
+                }
+                
+                .nav-links a {
+                  text-decoration: none;
+                  color: #333;
+                  font-weight: 500;
+                  transition: color 0.3s ease;
+                }
+                
+                .nav-links a:hover {
+                  color: #667eea;
+                }
+                
+                @media (max-width: 768px) {
+                  .nav {
+                    padding: 15px 20px;
+                  }
+                  .nav-links {
+                    display: none;
+                  }
+                }
+              </style>
+              
+              <nav class="nav">
+                <a href="#" class="logo">ModernLanding</a>
+                <ul class="nav-links">
+                  <li><a href="#home">Home</a></li>
+                  <li><a href="#features">Features</a></li>
+                  <li><a href="#demos">Demos</a></li>
+                  <li><a href="#about">About</a></li>
+                  <li><a href="#contact">Contact</a></li>
+                </ul>
+              </nav>
+            `;
+          }
+        }
+
+        class TestimonialSection extends HTMLElement {
+          constructor() {
+            super();
+            this.attachShadow({ mode: 'open' });
+            this.shadowRoot.innerHTML = `
+              <style>
+                :host {
+                  display: block;
+                  background: #f8f9fa;
+                  padding: 80px 20px 160px;
+                }
+                
+                .container {
+                  max-width: 1200px;
+                  margin: 0 auto;
+                  text-align: center;
+                }
+                
+                h2 {
+                  font-size: 2.5rem;
+                  margin-bottom: 60px;
+                  color: #333;
+                }
+                
+                .testimonials {
+                  display: grid;
+                  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+                  gap: 40px;
+                }
+                
+                .testimonial {
+                  background: white;
+                  padding: 40px;
+                  border-radius: 15px;
+                  box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+                  position: relative;
+                }
+                
+                .quote {
+                  font-size: 1.2rem;
+                  line-height: 1.6;
+                  color: #555;
+                  margin-bottom: 30px;
+                  font-style: italic;
+                }
+                
+                .author {
+                  display: flex;
+                  align-items: center;
+                  justify-content: center;
+                  gap: 15px;
+                }
+                
+                .avatar {
+                  width: 60px;
+                  height: 60px;
+                  border-radius: 50%;
+                  background: linear-gradient(45deg, #667eea, #764ba2);
+                  display: flex;
+                  align-items: center;
+                  justify-content: center;
+                  color: white;
+                  font-weight: bold;
+                  font-size: 1.5rem;
+                }
+                
+                .author-info h4 {
+                  margin: 0;
+                  color: #333;
+                  font-size: 1.1rem;
+                }
+                
+                .author-info p {
+                  margin: 5px 0 0;
+                  color: #666;
+                  font-size: 0.9rem;
+                }
+              </style>
+              
+              <div class="container">
+                <h2>What Our Clients Say</h2>
+                <div class="testimonials">
+                  <div class="testimonial">
+                    <div class="quote">"This platform completely transformed how we do business. The results were immediate and impressive."</div>
+                    <div class="author">
+                      <div class="avatar">S</div>
+                      <div class="author-info">
+                        <h4>Sarah Johnson</h4>
+                        <p>CEO, TechStart Inc.</p>
+                      </div>
+                    </div>
+                  </div>
+                  
+                  <div class="testimonial">
+                    <div class="quote">"Outstanding service and support. The team went above and beyond to ensure our success."</div>
+                    <div class="author">
+                      <div class="avatar">M</div>
+                      <div class="author-info">
+                        <h4>Michael Chen</h4>
+                        <p>CTO, InnovateCorp</p>
+                      </div>
+                    </div>
+                  </div>
+                  
+                  <div class="testimonial">
+                    <div class="quote">"The best investment we've made for our company. Highly recommend to anyone looking to grow."</div>
+                    <div class="author">
+                      <div class="avatar">E</div>
+                      <div class="author-info">
+                        <h4>Emily Rodriguez</h4>
+                        <p>Founder, GrowthLab</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            `;
+          }
+        }
+
+        class FooterSection extends HTMLElement {
+          constructor() {
+            super();
+            this.attachShadow({ mode: 'open' });
+            this.shadowRoot.innerHTML = `
+              <style>
+                :host {
+                  display: block;
+                  background: #333;
+                  color: white;
+                  padding: 50px 20px 20px;
+                }
+                
+                .container {
+                  max-width: 1200px;
+                  margin: 0 auto;
+                }
+                
+                .footer-content {
+                  display: grid;
+                  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+                  gap: 40px;
+                  margin-bottom: 30px;
+                }
+                
+                .footer-section h3 {
+                  margin-bottom: 20px;
+                  color: #fff;
+                }
+                
+                .footer-section p,
+                .footer-section a {
+                  color: #ccc;
+                  text-decoration: none;
+                  line-height: 1.8;
+                }
+                
+                .footer-section a:hover {
+                  color: #667eea;
+                }
+                
+                .social-links {
+                  display: flex;
+                  gap: 15px;
+                  margin-top: 20px;
+                }
+                
+                .social-link {
+                  width: 40px;
+                  height: 40px;
+                  border-radius: 50%;
+                  background: #555;
+                  display: flex;
+                  align-items: center;
+                  justify-content: center;
+                  transition: background 0.3s ease;
+                }
+                
+                .social-link:hover {
+                  background: #667eea;
+                }
+                
+                .footer-bottom {
+                  text-align: center;
+                  padding-top: 30px;
+                  border-top: 1px solid #555;
+                  color: #999;
+                }
+              </style>
+              
+              <div class="container">
+                <div class="footer-content">
+                  <div class="footer-section">
+                    <h3>ModernLanding</h3>
+                    <p>Building the future of web experiences with cutting-edge technology and innovative solutions.</p>
+                    <div class="social-links">
+                      <a href="#" class="social-link">📘</a>
+                      <a href="#" class="social-link">🐦</a>
+                      <a href="#" class="social-link">📷</a>
+                      <a href="#" class="social-link">💼</a>
+                    </div>
+                  </div>
+                  
+                  <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <p><a href="#home">Home</a></p>
+                    <p><a href="#features">Features</a></p>
+                    <p><a href="#about">About Us</a></p>
+                    <p><a href="#contact">Contact</a></p>
+                  </div>
+                  
+                  <div class="footer-section">
+                    <h3>Services</h3>
+                    <p><a href="#">Web Development</a></p>
+                    <p><a href="#">Mobile Apps</a></p>
+                    <p><a href="#">Cloud Solutions</a></p>
+                    <p><a href="#">Consulting</a></p>
+                  </div>
+                  
+                  <div class="footer-section">
+                    <h3>Contact Info</h3>
+                    <p>📧 hello@modernlanding.com</p>
+                    <p>📞 +1 (555) 123-4567</p>
+                    <p>📍 123 Tech Street, Digital City</p>
+                  </div>
+                </div>
+                
+                <div class="footer-bottom">
+                  <p>&copy; 2025 ModernLanding. All rights reserved.</p>
+                </div>
+              </div>
+            `;
+          }
+        }
+
+        // Register all custom elements
+        customElements.define('landing-page', LandingPage);
+        customElements.define('navigation-header', NavigationHeader);
+        customElements.define('testimonial-section', TestimonialSection);
+        customElements.define('footer-section', FooterSection);
+    </script>
+</body>
+</html>

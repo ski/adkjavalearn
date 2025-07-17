@@ -1,0 +1,864 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jolly AI Chat</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            color: #333;
+        }
+
+        /* Top Banner */
+        .top-banner {
+            background: #1a1a1a;
+            color: white;
+            padding: 8px 16px;
+            font-size: 13px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            position: relative;
+        }
+
+        .top-banner::before {
+            content: "🎯";
+            font-size: 16px;
+        }
+
+        .banner-text {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .install-link {
+            color: #667eea;
+            text-decoration: underline;
+            cursor: pointer;
+        }
+
+        .close-banner {
+            position: absolute;
+            right: 16px;
+            cursor: pointer;
+            font-size: 16px;
+            opacity: 0.8;
+        }
+
+        .close-banner:hover {
+            opacity: 1;
+        }
+
+        /* Main Layout */
+        .app-container {
+            display: flex;
+            height: calc(100vh - 32px);
+            background: white;
+            overflow: hidden;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            width: 280px;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-right: 1px solid rgba(102, 126, 234, 0.1);
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+
+        .sidebar-header {
+            padding: 16px;
+            border-bottom: 1px solid rgba(102, 126, 234, 0.1);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 18px;
+            font-weight: 600;
+            color: #667eea;
+        }
+
+        .logo::before {
+            content: "👾";
+            font-size: 24px;
+        }
+
+        .user-profile {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 16px;
+            border-bottom: 1px solid rgba(102, 126, 234, 0.1);
+            cursor: pointer;
+            transition: background 0.2s ease;
+        }
+
+        .user-profile:hover {
+            background: rgba(102, 126, 234, 0.05);
+        }
+
+        .avatar {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 600;
+            font-size: 14px;
+        }
+
+        .user-info h3 {
+            font-size: 14px;
+            font-weight: 600;
+            color: #333;
+        }
+
+        .user-info p {
+            font-size: 12px;
+            color: #667eea;
+        }
+
+        .promo-banner {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            padding: 12px 16px;
+            margin: 16px;
+            border-radius: 12px;
+            font-size: 13px;
+            position: relative;
+            cursor: pointer;
+            transition: transform 0.2s ease;
+        }
+
+        .promo-banner:hover {
+            transform: translateY(-1px);
+        }
+
+        .promo-banner .close {
+            position: absolute;
+            right: 12px;
+            top: 12px;
+            cursor: pointer;
+            opacity: 0.8;
+        }
+
+        .promo-banner .close:hover {
+            opacity: 1;
+        }
+
+        .menu-section {
+            padding: 16px;
+            flex: 1;
+            overflow-y: auto;
+        }
+
+        .menu-title {
+            font-size: 12px;
+            font-weight: 600;
+            color: #999;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 12px;
+        }
+
+        .menu-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            margin-bottom: 4px;
+            position: relative;
+        }
+
+        .menu-item:hover {
+            background: rgba(102, 126, 234, 0.1);
+        }
+
+        .menu-item.active {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+        }
+
+        .menu-item.active .menu-icon {
+            color: white;
+        }
+
+        .menu-icon {
+            font-size: 16px;
+            color: #667eea;
+            width: 20px;
+            text-align: center;
+        }
+
+        .menu-text {
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .new-badge {
+            background: #667eea;
+            color: white;
+            font-size: 10px;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-weight: 600;
+            text-transform: uppercase;
+            margin-left: auto;
+        }
+
+        .credits-section {
+            padding: 16px;
+            border-top: 1px solid rgba(102, 126, 234, 0.1);
+        }
+
+        .credits-card {
+            background: rgba(102, 126, 234, 0.05);
+            border: 1px solid rgba(102, 126, 234, 0.1);
+            border-radius: 12px;
+            padding: 16px;
+            margin-bottom: 16px;
+        }
+
+        .credits-info {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 8px;
+        }
+
+        .credits-circle {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 600;
+            font-size: 12px;
+        }
+
+        .credits-text {
+            font-size: 14px;
+            color: #333;
+        }
+
+        .upgrade-btn {
+            background: transparent;
+            border: 1px solid #667eea;
+            color: #667eea;
+            padding: 8px 16px;
+            border-radius: 8px;
+            font-size: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .upgrade-btn:hover {
+            background: #667eea;
+            color: white;
+        }
+
+        /* Main Content */
+        .main-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            background: white;
+        }
+
+        .main-header {
+            padding: 16px 24px;
+            border-bottom: 1px solid rgba(102, 126, 234, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .header-actions {
+            display: flex;
+            gap: 8px;
+        }
+
+        .header-btn {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            padding: 8px 12px;
+            border: 1px solid rgba(102, 126, 234, 0.2);
+            border-radius: 8px;
+            background: white;
+            color: #667eea;
+            font-size: 13px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .header-btn:hover {
+            background: rgba(102, 126, 234, 0.05);
+        }
+
+        .header-btn.delete {
+            color: #e74c3c;
+            border-color: rgba(231, 76, 60, 0.2);
+        }
+
+        .header-btn.delete:hover {
+            background: rgba(231, 76, 60, 0.05);
+        }
+
+        .chat-area {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 40px;
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.05) 0%, rgba(118, 75, 162, 0.05) 100%);
+        }
+
+        .welcome-message {
+            text-align: center;
+            max-width: 600px;
+            margin-bottom: 40px;
+        }
+
+        .welcome-title {
+            font-size: 48px;
+            font-weight: 700;
+            color: #333;
+            margin-bottom: 16px;
+        }
+
+        .welcome-title .highlight {
+            color: #667eea;
+        }
+
+        .welcome-subtitle {
+            font-size: 16px;
+            color: #666;
+            line-height: 1.5;
+            margin-bottom: 32px;
+        }
+
+        .chat-input-container {
+            width: 100%;
+            max-width: 600px;
+            position: relative;
+            margin-bottom: 32px;
+        }
+
+        .chat-input {
+            width: 100%;
+            padding: 16px 20px;
+            border: 2px solid rgba(102, 126, 234, 0.2);
+            border-radius: 25px;
+            font-size: 16px;
+            outline: none;
+            transition: all 0.3s ease;
+            background: white;
+            box-shadow: 0 4px 20px rgba(102, 126, 234, 0.1);
+        }
+
+        .chat-input:focus {
+            border-color: #667eea;
+            box-shadow: 0 4px 20px rgba(102, 126, 234, 0.2);
+        }
+
+        .send-btn {
+            position: absolute;
+            right: 8px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            padding: 8px 12px;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .send-btn:hover {
+            transform: translateY(-50%) scale(1.1);
+        }
+
+        .model-selector {
+            margin-bottom: 24px;
+        }
+
+        .model-select {
+            background: white;
+            border: 2px solid rgba(102, 126, 234, 0.2);
+            border-radius: 12px;
+            padding: 12px 16px;
+            font-size: 14px;
+            color: #333;
+            cursor: pointer;
+            outline: none;
+            transition: border-color 0.2s ease;
+        }
+
+        .model-select:focus {
+            border-color: #667eea;
+        }
+
+        .suggestions {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 16px;
+            width: 100%;
+            max-width: 800px;
+            margin-bottom: 40px;
+        }
+
+        .suggestion-card {
+            background: white;
+            border: 1px solid rgba(102, 126, 234, 0.1);
+            border-radius: 12px;
+            padding: 20px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            box-shadow: 0 2px 10px rgba(102, 126, 234, 0.05);
+        }
+
+        .suggestion-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 20px rgba(102, 126, 234, 0.1);
+            border-color: #667eea;
+        }
+
+        .suggestion-card h3 {
+            font-size: 14px;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 8px;
+        }
+
+        .suggestion-card p {
+            font-size: 13px;
+            color: #666;
+            line-height: 1.4;
+        }
+
+        .recent-chats {
+            width: 100%;
+            max-width: 800px;
+        }
+
+        .recent-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 16px;
+        }
+
+        .recent-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 16px;
+        }
+
+        .recent-chat {
+            background: white;
+            border: 1px solid rgba(102, 126, 234, 0.1);
+            border-radius: 12px;
+            padding: 16px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            box-shadow: 0 2px 10px rgba(102, 126, 234, 0.05);
+        }
+
+        .recent-chat:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.1);
+        }
+
+        .recent-chat h4 {
+            font-size: 14px;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 8px;
+        }
+
+        .recent-chat .time {
+            font-size: 12px;
+            color: #999;
+        }
+
+        /* Right Sidebar */
+        .right-sidebar {
+            width: 280px;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-left: 1px solid rgba(102, 126, 234, 0.1);
+            padding: 24px;
+            overflow-y: auto;
+        }
+
+        .search-container {
+            position: relative;
+            margin-bottom: 24px;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 12px 16px;
+            border: 2px solid rgba(102, 126, 234, 0.2);
+            border-radius: 12px;
+            font-size: 14px;
+            outline: none;
+            transition: border-color 0.2s ease;
+        }
+
+        .search-input:focus {
+            border-color: #667eea;
+        }
+
+        .search-shortcut {
+            position: absolute;
+            right: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: #f5f5f5;
+            color: #666;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-size: 11px;
+            font-weight: 600;
+        }
+
+        .sidebar-section {
+            margin-bottom: 32px;
+        }
+
+        .sidebar-section h3 {
+            font-size: 14px;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 16px;
+        }
+
+        .chat-history {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .history-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background 0.2s ease;
+        }
+
+        .history-item:hover {
+            background: rgba(102, 126, 234, 0.05);
+        }
+
+        .history-item .text {
+            flex: 1;
+            font-size: 14px;
+            color: #333;
+            font-weight: 500;
+        }
+
+        .history-item .time {
+            font-size: 12px;
+            color: #999;
+        }
+
+        .history-item .icon {
+            color: #667eea;
+            font-size: 16px;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .right-sidebar {
+                display: none;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .sidebar {
+                width: 250px;
+            }
+            
+            .app-container {
+                height: calc(100vh - 32px);
+            }
+            
+            .chat-area {
+                padding: 20px;
+            }
+            
+            .welcome-title {
+                font-size: 32px;
+            }
+            
+            .suggestions {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .sidebar {
+                position: fixed;
+                left: -280px;
+                transition: left 0.3s ease;
+                z-index: 1000;
+                height: 100vh;
+            }
+            
+            .sidebar.open {
+                left: 0;
+            }
+            
+            .main-content {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="top-banner">
+        <div class="banner-text">
+            Get Jolly AI Chat for Chrome
+            <span class="install-link">Install Extension</span>
+        </div>
+        <div class="close-banner">×</div>
+    </div>
+
+    <div class="app-container">
+        <div class="sidebar">
+            <div class="sidebar-header">
+                <div class="logo">Jolly</div>
+            </div>
+
+            <div class="user-profile">
+                <div class="avatar">MJ</div>
+                <div class="user-info">
+                    <h3>Matthew Johnson</h3>
+                    <p>Free account</p>
+                </div>
+            </div>
+
+            <div class="promo-banner">
+                <div class="close">×</div>
+                <strong>LIMITED</strong> Get 1 month FREE! by paying annually
+                <a href="#" style="color: rgba(255,255,255,0.8); text-decoration: underline;">View Discount →</a>
+            </div>
+
+            <div class="menu-section">
+                <div class="menu-title">Menu</div>
+                <div class="menu-item">
+                    <div class="menu-icon">🏠</div>
+                    <div class="menu-text">Home</div>
+                </div>
+                <div class="menu-item">
+                    <div class="menu-icon">📋</div>
+                    <div class="menu-text">My Meetings</div>
+                </div>
+                <div class="menu-item active">
+                    <div class="menu-icon">🤖</div>
+                    <div class="menu-text">Jolly AI Chat</div>
+                    <div class="new-badge">NEW</div>
+                </div>
+                <div class="menu-item">
+                    <div class="menu-icon">👥</div>
+                    <div class="menu-text">Shared with Me</div>
+                </div>
+                <div class="menu-item">
+                    <div class="menu-icon">📝</div>
+                    <div class="menu-text">Notes</div>
+                </div>
+                <div class="menu-item">
+                    <div class="menu-icon">🔌</div>
+                    <div class="menu-text">Integrations</div>
+                </div>
+            </div>
+
+            <div class="credits-section">
+                <div class="credits-card">
+                    <div class="credits-info">
+                        <div class="credits-circle">80</div>
+                        <div class="credits-text">80 credits left today</div>
+                    </div>
+                    <button class="upgrade-btn">Upgrade →</button>
+                </div>
+                
+                <div class="menu-item">
+                    <div class="menu-icon">⚙️</div>
+                    <div class="menu-text">Settings</div>
+                </div>
+                <div class="menu-item">
+                    <div class="menu-icon">❓</div>
+                    <div class="menu-text">Help & Support</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="main-content">
+            <div class="main-header">
+                <div></div>
+                <div class="header-actions">
+                    <button class="header-btn">
+                        📋 Share
+                    </button>
+                    <button class="header-btn delete">
+                        🗑️ Delete
+                    </button>
+                </div>
+            </div>
+
+            <div class="chat-area">
+                <div class="welcome-message">
+                    <h1 class="welcome-title">Start talking to <span class="highlight">Jolly</span></h1>
+                    <p class="welcome-subtitle">
+                        Your friendly AI chat assistant! Need quick answers, smart suggestions, or just a cheerful conversation? 
+                        Jolly is here to help with a smile. Start chatting now! 😊
+                    </p>
+                </div>
+
+                <div class="chat-input-container">
+                    <input type="text" class="chat-input" placeholder="Write a question...">
+                    <button class="send-btn">↑</button>
+                </div>
+
+                <div class="model-selector">
+                    <select class="model-select">
+                        <option>GPT-4o mini</option>
+                        <option>GPT-4</option>
+                        <option>GPT-3.5 Turbo</option>
+                    </select>
+                </div>
+
+                <div class="suggestions">
+                    <div class="suggestion-card">
+                        <h3>🔗 Add content</h3>
+                    </div>
+                    <div class="suggestion-card">
+                        <h3>How do I prepare for web designer interview?</h3>
+                    </div>
+                    <div class="suggestion-card">
+                        <h3>What are the key principles of effective web design?</h3>
+                    </div>
+                    <div class="suggestion-card">
+                        <h3>What are the best design trends for websites in 2025?</h3>
+                    </div>
+                </div>
+
+                <div class="recent-chats">
+                    <h2 class="recent-title">Recent Chat</h2>
+                    <div class="recent-grid">
+                        <div class="recent-chat">
+                            <h4>💬 New chat</h4>
+                            <div class="time">20 secs ago</div>
+                        </div>
+                        <div class="recent-chat">
+                            <h4>💬 Give me unique name logo for CRM dashboard</h4>
+                            <div class="time">45 mins ago</div>
+                        </div>
+                        <div class="recent-chat">
+                            <h4>💬 Create SaaS web app categories</h4>
+                            <div class="time">3 hour ago</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="right-sidebar">
+            <div class="search-container">
+                <input type="text" class="search-input" placeholder="Search">
+                <div class="search-shortcut">⌘ K</div>
+            </div>
+
+            <div class="sidebar-section">
+                <h3>TODAY</h3>
+                <div class="chat-history">
+                    <div class="history-item">
+                        <div class="icon">💬</div>
+                        <div class="text">New Chat</div>
+                        <div class="time">11:50 pm</div>
+                    </div>
+                    <div class="history-item">
+                        <div class="icon">💬</div>
+                        <div class="text">Give me unique name logo for...</div>
+                        <div class="time">11:25 pm</div>
+                    </div>
+                    <div class="history-item">
+                        <div class="icon">💬</div>
+                        <div class="text">Create SaaS web app categori...</div>
+                        <div class="time">08:57 pm</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="sidebar-section">
+                <h3>YESTERDAY</h3>
+                <div class="chat-history">
+                    <div class="history-item">
+                        <div class="icon">💬</div>
+                        <div class="text">Custom platform solution</div>
+                        <div class="time">09:15 am</div>
+                    </div>
+                    <div class="history-item">
+                        <div class="icon">💬</div>
+                        <div class="text">Investment insights monetizati...</div>
+                        <div class="time">07:02 am</div>
+                    </div>
+                    <div class="history-item">
+                        <div class="icon">💬</div>
+                        <div class="text">Give me 10 similar ecommerce...</div>
+                        <div class="time">04:50 am</div>
+                    </div>
+                    <div class="history-item">
+                        <div class="icon">💬</div>
+                        <div class="text">5 top ecommerce integration a...</div>
+                        <div class="time">04:11 am</div>
+                    </div>
+                    <div class="history-item">
+                        <div class="icon">💬</div>
+                        <div class="text">Create content for privacy poli...</div>
+                        <div class="time">02:15 am</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
